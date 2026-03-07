@@ -1,12 +1,31 @@
+from settings import TILE, PLAYER_LIVES
 
-import tkinter as tk
-from tkinter import *
 class Player:
-    def __init__(self):
-        self.bomberman = PhotoImage(file='bomberman.png')
+    def __init__(self, canvas):
+        self.canvas = canvas
+        self.x = 1
+        self.y = 1
+        self.lives = PLAYER_LIVES
 
-    def on_key_press(self, event):
-        if event.key == "W":
-            self.canvas.move(self.rect_id, 0, 1)
+        self.id = canvas.create_rectangle(
+            self.x*TILE, self.y*TILE,
+            self.x*TILE+TILE-10, self.y*TILE+TILE-10,
+            fill="blue"
+        )
 
+    def move(self, dx, dy, level):
+        new_x = self.x + dx
+        new_y = self.y + dy
 
+        if level[new_y][new_x] == 0:
+            self.x = new_x
+            self.y = new_y
+            self.canvas.coords(
+                self.id,
+                self.x*TILE, self.y*TILE,
+                self.x*TILE+TILE-10,
+                self.y*TILE+TILE-10
+            )
+
+    def hit(self):
+        self.lives -= 1

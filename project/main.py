@@ -1,20 +1,15 @@
 import tkinter as tk
-from tkinter import *
-from tkinter import ttk
+from settings import WIDTH, HEIGHT, BG
+from menu import show_menu
+from Game import Game
 
-import Player
-#Создание окна
 root = tk.Tk()
-root.title("BomberMan")
-root.geometry("800x600")
+root.title("Bomberman")
+root.geometry(f"{WIDTH}x{HEIGHT}")
+show_menu(root)
 
+canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BG)
+canvas.pack()
 
-def click_button():
-    root.destroy()
-
-btn = ttk.Button(text = "Выход", command = click_button)
-btn.pack(anchor="w", expand=True)
-
-
-#Игровой цикл
+Game(root, canvas)
 root.mainloop()
