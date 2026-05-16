@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from PIL import Image, ImageTk
+from tkinter import *
 
 from config import load_settings, save_settings
 from sprites import ASSETS_DIR
@@ -237,9 +237,7 @@ def show_menu(root):
         path = ASSETS_DIR / "MenuBack.png"
         if path.exists():
             try:
-                im = Image.open(path).convert("RGBA")
-                im = im.resize((w, h), Image.Resampling.LANCZOS)
-                photo_holder[0] = ImageTk.PhotoImage(im, master=root)
+                photo_holder[0] = PhotoImage(file = f"{path}", master=root)
                 c.create_image(w // 2, h // 2, image=photo_holder[0])
             except OSError:
                 c.create_rectangle(0, 0, w, h, fill=MENU_BG, outline="")

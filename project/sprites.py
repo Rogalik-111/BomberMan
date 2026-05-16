@@ -1,12 +1,14 @@
 import tkinter as tk
 from pathlib import Path
+from tkinter import *
 import sys
 ASSETS_DIR = Path(__file__).with_name("Images")
 
 # Имя спрайта → файл в папке Images/
 SPRITE_FILES = {
     "Player": "Player.png",
-    "Enemy": "Enemy.png",
+    "EnemyRight": "EnemyRight.png",
+    "EnemyLeft": "EnemyLeft.png",
     "Bomb": "Bomb.png",
     "Bonus": "Bonus.png",
     "BonusBomb": "BonusBomb.png",
@@ -55,18 +57,17 @@ def get_enemy_face_images(master):
     if key in _enemy_faces:
         return _enemy_faces[key]
 
-    path = resource_path(f"Images/{SPRITE_FILES['Enemy']}")
-    if not path.exists():
+    pathr = resource_path(f"Images/{SPRITE_FILES['EnemyRight']}")
+    pathl = resource_path(f"Images/{SPRITE_FILES['EnemyLeft']}")
+    if not pathr.exists() and not pathl.exists():
         _enemy_faces[key] = (None, None)
         return _enemy_faces[key]
 
     try:
-        from PIL import Image, ImageTk
 
-        im = Image.open(path).convert("RGBA")
-        left = ImageTk.PhotoImage(im, master=master)
-        right = ImageTk.PhotoImage(
-            im.transpose(Image.FLIP_LEFT_RIGHT), master=master
+        left = PhotoImage(file = f"{pathr}", master=master)
+        right = PhotoImage(
+            file = f"{pathl}", master=master
         )
         _enemy_faces[key] = (left, right)
     except Exception:
