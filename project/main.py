@@ -1,4 +1,5 @@
 import tkinter as tk
+from tkinter import messagebox
 
 from settings import WIDTH, HEIGHT, BG, ROWS, COLS, TILE
 from menu import show_menu
@@ -58,6 +59,13 @@ def main():
         canvas.delete("all")
         for w in list(info_frame.winfo_children()):
             w.destroy()
+
+        if action == "new":
+            messagebox.showinfo(
+                "Обучение",
+                "Управление: \n    Ходьба: WASD, \n    Установка бомб: Пробел, \nБонусы: Чтобы подобрать бонус встаньте на него и он активируется, \nВаша задача: Уничтожить всех врагов и найти выход",
+                parent=root,
+            )
 
         game = Game(
             root,

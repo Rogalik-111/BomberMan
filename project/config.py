@@ -1,7 +1,8 @@
 import json
-from pathlib import Path
 
-SETTINGS_FILE = Path(__file__).with_name("settings.json")
+from paths import get_data_dir
+
+SETTINGS_FILE = get_data_dir() / "settings.json"
 
 DEFAULT_SETTINGS = {
     "volume": 50,

@@ -1,7 +1,8 @@
 import json
-from pathlib import Path
 
-SAVE_FILE = Path(__file__).with_name("game_save.json")
+from paths import get_data_dir
+
+SAVE_FILE = get_data_dir() / "game_save.json"
 
 
 def has_save():
